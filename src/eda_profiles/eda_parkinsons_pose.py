@@ -42,6 +42,27 @@ updrs_profile = pd.DataFrame(updrs_rows)
 display(updrs_profile.round(2))
 updrs_profile.to_csv(OUTPUT/'tables'/'pose_estimation_updrs_profile.csv', index=False)
 
+# Ratings were averaged across raters and include thirds. Category 0 means
+# exactly zero; category k=1..4 means (k-1, k]. This retains every trial.
+gait_values=pd.to_numeric(pd.Series(updrs['3.10']),errors='coerce').dropna()
+assert gait_values.between(0,4).all()
+gait_bins=np.ceil(gait_values).astype(int)
+gait_counts=gait_bins.value_counts().reindex(range(5),fill_value=0).sort_index()
+gait_table=pd.DataFrame({'display_category':range(5), 'trial_ids':gait_counts.values,
+                         'score_interval':['exactly 0','(0,1]','(1,2]','(2,3]','(3,4]']})
+display(gait_table)
+gait_table.to_csv(OUTPUT/'tables'/'pose_estimation_score_categories.csv',index=False)
+fig,ax=plt.subplots(figsize=(7,4))
+bars=ax.bar(gait_table.display_category,gait_table.trial_ids,color=['#94a3b8']+['#0f766e']*4)
+ax.set_xticks(range(5),[f'{i}\n{interval}' for i,interval in zip(gait_table.display_category,gait_table.score_interval)])
+ax.set(xlabel='Binned UPDRS gait-item mean (not raw ordinal ratings)',ylabel='Trial IDs',
+       title='Clinical pose UPDRS gait categories 1–4, with zero')
+for bar,count in zip(bars,gait_table.trial_ids):
+    ax.text(bar.get_x()+bar.get_width()/2,bar.get_height()+.6,str(count),ha='center')
+ax.set_ylim(0,gait_table.trial_ids.max()*1.17)
+fig.tight_layout();fig.savefig(OUTPUT/'figures'/'pose_estimation_score_categories.png',dpi=150);plt.show()
+display(Markdown('Categories **1–4** are explicit intervals of the released averaged gait score: `(0,1]`, `(1,2]`, `(2,3]`, `(3,4]`. Exact zero has its own bar. These bins are a display aid; they are not the original individual rater categories.'))
+
 fig, axes = plt.subplots(1, 2, figsize=(11, 3.7))
 for ax, field, title, color in zip(axes, ['Total','3.10'], ['UPDRS Total','UPDRS item 3.10 (gait)'], ['#2563eb','#0f766e']):
     values = pd.to_numeric(pd.Series(updrs[field]), errors='coerce').dropna()

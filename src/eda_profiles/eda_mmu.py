@@ -4,11 +4,24 @@ from IPython.display import display, Markdown
 order = ['NORMAL', 'MILD', 'MODERATE', 'SEVERE']
 class_table = pd.DataFrame({'folder_label': order, 'recordings': [counts.get(label, 0) for label in order]})
 class_table['share_pct'] = 100 * class_table.recordings / class_table.recordings.sum()
+class_table.insert(0, 'display_category', [1,2,3,4])
 display(pd.DataFrame([{'recordings':int(class_table.recordings.sum()), 'participants':'Unknown',
                        'source_FPS':'Unknown', 'pose_dimension':'2D pixels',
-                       'labels':'Normal, Mild, Moderate, Severe', 'count_scope':count_scope}]))
+                       'labels':'Normal, Mild, Moderate, Severe (dataset classes, not UPDRS)', 'count_scope':count_scope}]))
 display(class_table.round(1))
 class_table.to_csv(OUTPUT/'tables'/'mmu_label_distribution.csv', index=False)
+class_table.to_csv(OUTPUT/'tables'/'mmu_score_categories.csv', index=False)
+
+fig, ax = plt.subplots(figsize=(7,4))
+bars=ax.bar(class_table.display_category, class_table.recordings,
+            color=['#64748b','#60a5fa','#2563eb','#1e3a8a'])
+ax.set_xticks([1,2,3,4], [f'{i}\n{label.title()}' for i,label in zip(class_table.display_category,class_table.folder_label)])
+ax.set(xlabel='Display category (source label; not UPDRS)', ylabel='JSON recordings',
+       title='MMU source categories 1–4')
+for bar, count in zip(bars,class_table.recordings):
+    ax.text(bar.get_x()+bar.get_width()/2,bar.get_height()+2,str(count),ha='center')
+ax.set_ylim(0,class_table.recordings.max()*1.17)
+fig.tight_layout();fig.savefig(OUTPUT/'figures'/'mmu_score_categories.png',dpi=150);plt.show()
 
 frame_lengths = pd.Series(overview.frames.to_numpy(), dtype=float)
 selected_skew = frame_lengths.skew() if frame_lengths.nunique() > 1 else float('nan')

@@ -10,8 +10,10 @@ Three reproducible exploratory notebooks that generated nine animations from aut
 - `outputs/figures/`: one PNG preview per video plus notebook charts.
 - `outputs/tables/simulation_manifest.csv`: source ID and frame-range traceability.
 - `outputs/tables/*_distribution_profile.csv`: numeric skewness and distribution scope for each dataset.
+- `outputs/figures/*_score_categories.png`: per-dataset bar charts for display categories 1–4, with source score 0 retained where present.
 - `outputs/reports/dataset_comparison.md`: verified findings, limitations and recommendations.
 - `docs/dataset_comparison.md`: aggregate comparison report included in the public repository.
+- `docs/figures/`: public aggregate score-category bar charts for the three datasets.
 - `outputs/reports/video_verification.json`: decoded frame counts and durations.
 
 The original large C3D archive and downloaded pose/MMU source data live in ignored `raw/` files or root archives. They are excluded from repository commits. Python requirements are in `requirements.txt`; local MP4 encoding uses `ffmpeg` or the `imageio-ffmpeg` binary. Execute locally with `python scripts/execute_local.py bmclab` (also `mmu` or `parkinsons_pose`). Rebuild notebooks with `python scripts/build_notebooks.py`. Recreate the original BMCLab inventory with `python scripts/prepare_inventory.py`. Verify videos with `python scripts/verify_outputs.py`.

@@ -39,6 +39,25 @@ Skewness below is the adjusted Fisher–Pearson coefficient calculated by `panda
 
 **UPDRS score skewness:** In the local full BMCLab metadata, ON UPDRS-III scores have skewness **+0.43** across 25 usable participant scores, and OFF scores **+1.10** across 23. The private Kaggle input retains only two participant rows, so its score skewness is correctly undefined. In the clinical pose archive's `UPDRS.txt`, the released **Total** score has skewness **+1.01** across 79 trial IDs; the separate **3.10 gait item** has skewness **+0.59** across the same 79 trial IDs. These are distinct source scales and units of observation: BMCLab rows are participants, whereas the pose ratings are trial linked and may repeat participants. Pooled pose duration skew should be read alongside the per-task values because the tasks have different recording lengths. These are descriptive dataset properties, not evidence of motor symptom severity. The executed notebooks save the underlying tables and display the corresponding plots.
 
+## Source score categories 1–4
+
+The notebooks include separate bar charts saved as `mmu_score_categories.png`, `bmclab_score_categories.png`, and `pose_estimation_score_categories.png`. Score **0** is displayed where it exists, so the 1–4 view does not discard source ratings.
+
+| Dataset and field | 0 | 1 | 2 | 3 | 4 | Interpretation |
+|---|---:|---:|---:|---:|---:|---|
+| MMU source label | — | 150 Normal | 29 Mild | 61 Moderate | 52 Severe | Display order only; these are not UPDRS scores |
+| BMCLab UPDRS-III walking, ON | 14 | 6 | 5 | 0 | 0 | Recorded integer item scores from 25 participants |
+| BMCLab UPDRS-III walking, OFF | 6 | 9 | 8 | 0 | 0 | Recorded integer item scores from 23 participants |
+| Clinical pose UPDRS gait item 3.10 | 19 | 39 | 21 | 0 | 0 | Averaged rater score: 0 exactly; category *k* covers `(k−1, k]` |
+
+The BMCLab walking-item chart uses the full local spreadsheet. The approved private Kaggle input has UPDRS-III **totals** but lacks its separate walking-item columns, so its notebook explains why that chart cannot be made from the reduced remote metadata. The pose archive supplies fractional 3.10 scores; its 1–4 bins are a display grouping, not original integer ratings. BMCLab and pose **total** UPDRS scores are not mapped into 1–4 categories because no validated thresholds are supplied.
+
+![MMU source label categories](figures/mmu_score_categories.png)
+
+![BMCLab recorded UPDRS-III walking-item scores](figures/bmclab_score_categories.png)
+
+![Clinical pose binned UPDRS gait-item scores](figures/pose_estimation_score_categories.png)
+
 ## Recommendations
 
 1. **Accurate 3D motion:** BMCLab. Its original C3D coordinates, known units, timing, and named markers support a defensible spatial reconstruction. A surface avatar needs extra model fitting and licensed body assets.

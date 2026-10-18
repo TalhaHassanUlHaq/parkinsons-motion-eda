@@ -12,6 +12,30 @@ display(pd.DataFrame([{'C3D_recordings':len(inventory), 'participants':subject_c
                        'pose_dimension':'measured 3D metres',
                        'labels':'ON/OFF; FoG group and UPDRS-III at participant level'}]))
 
+# The full local spreadsheet contains the actual 0–4 walking item. The
+# approved two-subject Kaggle input contains totals only, so skip there.
+walking_columns={'ON':'ON - UPDRS-III - walking','OFF':'OFF - UPDRS-III - walking'}
+if all(col in meta.columns for col in walking_columns.values()):
+    walking_counts=pd.DataFrame({'score':range(5)})
+    for medication_label,column in walking_columns.items():
+        values=pd.to_numeric(meta[column],errors='coerce').dropna()
+        assert values.between(0,4).all() and values.eq(values.round()).all(), column
+        walking_counts[medication_label]=values.astype(int).value_counts().reindex(range(5),fill_value=0).values
+    display(walking_counts)
+    walking_counts.to_csv(OUTPUT/'tables'/'bmclab_score_categories.csv',index=False)
+    fig,ax=plt.subplots(figsize=(7,4))
+    x=np.arange(5);width=.38
+    ax.bar(x-width/2,walking_counts.ON,width,label='ON',color='#0f766e')
+    ax.bar(x+width/2,walking_counts.OFF,width,label='OFF',color='#ea580c')
+    ax.set_xticks(x,[str(i) for i in x])
+    ax.set(xlabel='Recorded UPDRS-III walking item score',ylabel='Participants',
+           title='BMCLab UPDRS gait item by medication')
+    ax.legend();fig.tight_layout()
+    fig.savefig(OUTPUT/'figures'/'bmclab_score_categories.png',dpi=150);plt.show()
+    display(Markdown('Scores **1–4** are shown as recorded; **0** is also shown because it occurs in the source. Counts are participant ratings, not numbers of C3D trials.'))
+else:
+    display(Markdown('The approved private Kaggle sample contains UPDRS-III **totals** but not the 0–4 walking-item columns. Its gait-category bar chart is available only in the full local-data execution; totals cannot be relabeled as 1–4 gait scores.'))
+
 def numeric_profile(name, values, scope, units):
     values = pd.Series(values, dtype=float).dropna()
     skew = values.skew() if len(values) >= 3 and values.nunique() > 1 else float('nan')
