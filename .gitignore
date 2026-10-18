@@ -1,0 +1,11 @@
+.env
+raw/
+*.zip
+PDGinfo.xlsx
+mmu_filelist_page*.csv
+outputs/
+kaggle/
+sample_notebook/
+reference/
+__pycache__/
+.ipynb_checkpoints/

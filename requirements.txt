@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+ezc3d
+imageio-ffmpeg
+nbformat
+nbclient
+ipykernel
+openpyxl
+kaggle
