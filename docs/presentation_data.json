@@ -1,0 +1,45 @@
+{
+  "as_of": "2026-10-18",
+  "overview": [
+    {"dataset": "MMU", "modality": "2D AlphaPose", "participants": null, "participant_note": "167 reported by data card; not verifiable from local JSON", "recordings": 292, "recording_unit": "labeled JSON files", "selected": 3, "source_fps": null, "clinical_field": "folder severity label"},
+    {"dataset": "BMCLab", "modality": "3D C3D markers", "participants": 26, "participant_note": "distinct source SUB IDs", "recordings": 935, "recording_unit": "C3D files (887 walks, 48 static)", "selected": 3, "source_fps": 150, "clinical_field": "UPDRS-III total and walking item; ON/OFF"},
+    {"dataset": "Clinical pose", "modality": "2D CPM trajectories", "participants": 9, "participant_note": "distinct IDs in trial map", "recordings": 643, "recording_unit": "pose trajectories in three tasks", "selected": 3, "source_fps": 30, "clinical_field": "trial-linked UPDRS, UDysRS, CAPSIT"}
+  ],
+  "selected_durations": [
+    {"dataset": "BMCLab", "sample": "walk 1", "seconds": 15.573333},
+    {"dataset": "BMCLab", "sample": "walk 2", "seconds": 2.933333},
+    {"dataset": "BMCLab", "sample": "walk 3", "seconds": 3.046667},
+    {"dataset": "Clinical pose", "sample": "communication 1", "seconds": 14.166667},
+    {"dataset": "Clinical pose", "sample": "drinking", "seconds": 11.666667},
+    {"dataset": "Clinical pose", "sample": "communication 2", "seconds": 9.533333}
+  ],
+  "score_categories": {
+    "MMU folder labels": {"0": null, "1": 150, "2": 29, "3": 61, "4": 52},
+    "BMCLab ON walking item": {"0": 14, "1": 6, "2": 5, "3": 0, "4": 0},
+    "BMCLab OFF walking item": {"0": 6, "1": 9, "2": 8, "3": 0, "4": 0},
+    "Clinical pose gait item bins": {"0": 19, "1": 39, "2": 21, "3": 0, "4": 0}
+  },
+  "medication_file_counts": {"ON": 498, "OFF": 437},
+  "fog_group_participants": {"Freezer": 13, "Nonfreezer": 13},
+  "clinical_pose_tasks": {"Communication": 387, "Drinking": 124, "Leg agility": 132},
+  "skewness": [
+    {"dataset": "MMU", "measure": "selected recording frame count", "n": 3, "skewness": 1.191775, "scope": "three selected JSONs"},
+    {"dataset": "BMCLab", "measure": "C3D trials per participant", "n": 26, "skewness": -1.365070, "scope": "complete archive inventory"},
+    {"dataset": "BMCLab", "measure": "ON UPDRS-III total", "n": 25, "skewness": 0.430047, "scope": "local metadata participants"},
+    {"dataset": "BMCLab", "measure": "OFF UPDRS-III total", "n": 23, "skewness": 1.096899, "scope": "local metadata participants"},
+    {"dataset": "Clinical pose", "measure": "trajectory duration", "n": 643, "skewness": 0.583226, "scope": "three tasks pooled"},
+    {"dataset": "Clinical pose", "measure": "UPDRS Total", "n": 79, "skewness": 1.012302, "scope": "trial IDs"},
+    {"dataset": "Clinical pose", "measure": "UPDRS gait item 3.10", "n": 79, "skewness": 0.590180, "scope": "trial IDs"}
+  ],
+  "pose_duration_by_task": [
+    {"task": "Communication", "n": 387, "median_s": 10.866667, "p90_s": 14.82, "skewness": 0.942773},
+    {"task": "Drinking", "n": 124, "median_s": 6.95, "p90_s": 11.02, "skewness": 1.231343},
+    {"task": "Leg agility", "n": 132, "median_s": 10.55, "p90_s": 15.073333, "skewness": 0.409934}
+  ],
+  "updrs_summary": [
+    {"dataset": "BMCLab", "field": "ON UPDRS-III total", "unit": "participants", "n": 25, "median": 20.0, "skewness": 0.430047},
+    {"dataset": "BMCLab", "field": "OFF UPDRS-III total", "unit": "participants", "n": 23, "median": 26.0, "skewness": 1.096899},
+    {"dataset": "Clinical pose", "field": "UPDRS Total", "unit": "trial IDs", "n": 79, "median": 21.333333, "skewness": 1.012302},
+    {"dataset": "Clinical pose", "field": "UPDRS gait item 3.10", "unit": "trial IDs", "n": 79, "median": 0.666667, "skewness": 0.590180}
+  ]
+}

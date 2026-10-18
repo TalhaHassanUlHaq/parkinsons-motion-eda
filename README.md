@@ -4,6 +4,7 @@ Three reproducible exploratory notebooks that generated nine animations from aut
 
 ## Start here
 
+- `notebooks/eda_instructor_presentation.ipynb`: one instructor-facing notebook following the supplied CARE-PD presentation flow. Its public aggregate charts are pre-rendered. In this working copy, `outputs/executed/eda_instructor_presentation.ipynb` also embeds three example animations.
 - `notebooks/eda_mmu.ipynb`, `notebooks/eda_bmclab.ipynb`, `notebooks/eda_parkinsons_pose.ipynb`: source notebooks.
 - `outputs/executed/`: locally executed notebooks.
 - `outputs/videos/{mmu,bmclab,pose_estimation}/`: three MP4s per dataset.
@@ -13,10 +14,13 @@ Three reproducible exploratory notebooks that generated nine animations from aut
 - `outputs/figures/*_score_categories.png`: per-dataset bar charts for display categories 1–4, with source score 0 retained where present.
 - `outputs/reports/dataset_comparison.md`: verified findings, limitations and recommendations.
 - `docs/dataset_comparison.md`: aggregate comparison report included in the public repository.
+- `docs/presentation_data.json`: source-labeled aggregate snapshot used by the instructor notebook; no participant-level rows.
 - `docs/figures/`: public aggregate score-category bar charts for the three datasets.
 - `outputs/reports/video_verification.json`: decoded frame counts and durations.
 
 The original large C3D archive and downloaded pose/MMU source data live in ignored `raw/` files or root archives. They are excluded from repository commits. Python requirements are in `requirements.txt`; local MP4 encoding uses `ffmpeg` or the `imageio-ffmpeg` binary. Execute locally with `python scripts/execute_local.py bmclab` (also `mmu` or `parkinsons_pose`). Rebuild notebooks with `python scripts/build_notebooks.py`. Recreate the original BMCLab inventory with `python scripts/prepare_inventory.py`. Verify videos with `python scripts/verify_outputs.py`.
+
+To refresh the instructor notebook and its public aggregate outputs, run `python scripts/build_presentation.py`. The builder executes it in an isolated directory containing only `docs/presentation_data.json`, so no private media or row-level clinical data enter the committed notebook. To produce the local version with animations, execute the same notebook from the repository root after the source notebooks have generated `outputs/videos/`.
 
 ## Kaggle
 
