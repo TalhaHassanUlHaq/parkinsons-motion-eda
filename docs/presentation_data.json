@@ -13,6 +13,11 @@
     {"dataset": "Clinical pose", "sample": "drinking", "seconds": 11.666667},
     {"dataset": "Clinical pose", "sample": "communication 2", "seconds": 9.533333}
   ],
+  "selected_quality": {
+    "MMU": {"selected_recordings": 3, "source_frames": 671, "mean_valid_joint_fraction": 0.600772, "minimum_valid_joint_fraction": 0.576514, "frame_gaps": 3, "median_of_recording_median_rates": 1.540179, "rate_unit": "pixels per source frame"},
+    "BMCLab": {"selected_recordings": 3, "source_frames": 3233, "mean_valid_joint_fraction": 1.0, "minimum_valid_joint_fraction": 1.0, "frame_gaps": 0, "median_of_recording_median_rates": 0.941154, "rate_unit": "metres per second"},
+    "Clinical pose": {"selected_recordings": 3, "source_frames": 1061, "mean_valid_joint_fraction": 0.97585, "minimum_valid_joint_fraction": 0.927551, "frame_gaps": 0, "median_of_recording_median_rates": 15.270092, "rate_unit": "pixels per second"}
+  },
   "score_categories": {
     "MMU folder labels": {"0": null, "1": 150, "2": 29, "3": 61, "4": 52},
     "BMCLab ON walking item": {"0": 14, "1": 6, "2": 5, "3": 0, "4": 0},
