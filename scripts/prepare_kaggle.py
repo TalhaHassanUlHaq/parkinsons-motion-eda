@@ -24,7 +24,7 @@ for filename in ["SUB01_off_walk_14.c3d","SUB01_on_walk_19.c3d","SUB02_off_walk_
 (bm/"PDGinfo.xlsx").unlink(missing_ok=True)
 clinical_columns=["ID","FoG group","ON - UPDRS-III","OFF - UPDRS-III"]
 clinical_rows=[{col:row.get(col,"") for col in clinical_columns}
-               for row in read_simple_xlsx(ROOT/"PDGinfo.xlsx")
+               for row in read_simple_xlsx(ROOT/"raw/bmclab/PDGinfo.xlsx")
                if row.get("ID") in {"SUB01","SUB02"}]
 with (bm/"bmclab_selected_metadata.csv").open("w",newline="",encoding="utf8") as f:
     writer=csv.DictWriter(f,fieldnames=clinical_columns);writer.writeheader();writer.writerows(clinical_rows)

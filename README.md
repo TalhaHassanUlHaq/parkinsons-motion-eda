@@ -2,6 +2,19 @@
 
 Three reproducible exploratory notebooks that generated nine animations from authentic Parkinson movement datasets. No classifier is trained. This public code repository excludes raw clinical records, rendered videos, private Kaggle inputs, credentials, and third-party reference notebooks.
 
+## Directory layout
+
+| Folder | Contents |
+|---|---|
+| `notebooks/` | Source EDA, separate instructor presentations, and combined presentation |
+| `scripts/`, `src/` | Rebuild, execution, verification, and analysis code |
+| `docs/` | Public aggregate report and presentation data |
+| `raw/{mmu,bmclab,pose}/` | Local source samples and metadata; ignored by Git |
+| `raw/archives/` | Original BMCLab and clinical pose ZIP archives; ignored by Git |
+| `references/` | Supplied CARE-PD notebook and clinical-pose import example; ignored by Git |
+| `kaggle/` | Private upload and notebook staging; ignored by Git |
+| `outputs/{executed,figures,kaggle,reports,tables,videos}/` | Generated results; ignored by Git |
+
 ## Start here
 
 - `notebooks/eda_mmu_presentation.ipynb`, `eda_bmclab_presentation.ipynb`, and `eda_pose_estimation_presentation.ipynb`: **separate instructor notebooks**, each following the supplied CARE-PD structure and showing pre-rendered public aggregate charts. The local executed copies under `outputs/executed/` embed three authentic motion examples per dataset.
@@ -19,7 +32,7 @@ Three reproducible exploratory notebooks that generated nine animations from aut
 - `docs/figures/`: public aggregate score-category bar charts for the three datasets.
 - `outputs/reports/video_verification.json`: decoded frame counts and durations.
 
-The original large C3D archive and downloaded pose/MMU source data live in ignored `raw/` files or root archives. They are excluded from repository commits. Python requirements are in `requirements.txt`; local MP4 encoding uses `ffmpeg` or the `imageio-ffmpeg` binary. Execute locally with `python scripts/execute_local.py bmclab` (also `mmu` or `parkinsons_pose`). Rebuild notebooks with `python scripts/build_notebooks.py`. Recreate the original BMCLab inventory with `python scripts/prepare_inventory.py`. Verify videos with `python scripts/verify_outputs.py`.
+The original archives and downloaded pose/MMU source data live under ignored `raw/`. They are excluded from repository commits. Python requirements are in `requirements.txt`; local MP4 encoding uses `ffmpeg` or the `imageio-ffmpeg` binary. Execute locally with `python scripts/execute_local.py bmclab` (also `mmu` or `parkinsons_pose`). Rebuild notebooks with `python scripts/build_notebooks.py`. Recreate the original BMCLab inventory with `python scripts/prepare_inventory.py`. Verify videos with `python scripts/verify_outputs.py`.
 
 To refresh the instructor notebook and its public aggregate outputs, run `python scripts/build_presentation.py`. The builder executes it in an isolated directory containing only `docs/presentation_data.json`, so no private media or row-level clinical data enter the committed notebook. To produce the local version with animations, execute the same notebook from the repository root after the source notebooks have generated `outputs/videos/`.
 

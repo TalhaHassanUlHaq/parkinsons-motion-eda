@@ -5,7 +5,6 @@ PDGinfo.xlsx
 mmu_filelist_page*.csv
 outputs/
 kaggle/
-sample_notebook/
-reference/
+references/
 __pycache__/
 .ipynb_checkpoints/

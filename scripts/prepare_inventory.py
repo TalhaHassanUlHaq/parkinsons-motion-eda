@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 root=Path(__file__).resolve().parents[1]
 rows=[]
-with ZipFile(root/"C3Dfiles.zip") as z:
+with ZipFile(root/"raw/archives/bmclab/C3Dfiles.zip") as z:
     for info in z.infolist():
         if not info.filename.lower().endswith(".c3d"): continue
         name=Path(info.filename).name
